@@ -38,7 +38,7 @@
 /* Стилі для інпуту */
 #search-form input[type='text'] {
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
