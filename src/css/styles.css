@@ -99,3 +99,30 @@
   right: 10px;
   z-index: 10000;
 }
+.loader {
+  border: 8px solid #f3f3f3; /* Світлий колір для обводки */
+  border-top: 8px solid #3498db; /* Синій колір для верхньої обводки */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Підняти над іншими елементами */
+}
+
+.hidden {
+  display: none;
+}

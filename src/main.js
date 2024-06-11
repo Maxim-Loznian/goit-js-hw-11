@@ -6,16 +6,17 @@ import { clearGallery, renderImages } from './js/render-functions';
 const searchForm = document.querySelector('#search-form');
 const searchInput = document.querySelector('#search-form input');
 const gallery = document.querySelector('.gallery');
+const loader = document.getElementById('loader');
 
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
+  // Показати індикатор завантаження
+  loader.classList.remove('hidden');
+
   const query = searchInput.value.trim();
   if (query === '') {
-    iziToast.error({
-      title: 'Error',
-      message: 'Search query cannot be empty'
-    });
+    showErrorToast('Search query cannot be empty');
     return;
   }
 
@@ -25,18 +26,25 @@ searchForm.addEventListener('submit', async (event) => {
     const data = await fetchImages(query);
 
     if (data.hits.length === 0) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Sorry, there are no images matching your search query. Please try again.'
-      });
+      showErrorToast('Sorry, there are no images matching your search query. Please try again.');
       return;
     }
 
     renderImages(data.hits);
   } catch (error) {
-    iziToast.error({
-      title: 'Error',
-      message: error.message
-    });
+    showErrorToast(error.message);
+  } finally {
+    // Приховати індикатор завантаження незалежно від результату
+    loader.classList.add('hidden');
   }
 });
+
+function showErrorToast(message) {
+  iziToast.error({
+    title: 'Error',
+    message: message,
+    position: 'topRight'
+   });
+}
+
+ 
