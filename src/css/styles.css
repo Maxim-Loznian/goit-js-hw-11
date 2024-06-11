@@ -24,6 +24,43 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* Стилі для форми */
+#search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилі для інпуту */
+#search-form input[type='text'] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 300px; /* Встановлено фіксовану ширину */
+  margin-right: 10px; /* Проміжок між інпутом і кнопкою */
+}
+
+/* Стилі для кнопки */
+#search-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+#search-form button:hover {
+  background-color: #0056b3;
+}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
