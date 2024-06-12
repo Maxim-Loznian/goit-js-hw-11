@@ -11,12 +11,16 @@ const loader = document.getElementById('loader');
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  // Показати індикатор завантаження
+  // Показать индикатор загрузки
   loader.classList.remove('hidden');
 
   const query = searchInput.value.trim();
   if (query === '') {
-    showErrorToast('Search query cannot be empty');
+    // Установить таймер на 2 секунды перед отображением ошибки
+    setTimeout(() => {
+      showErrorToast('Search query cannot be empty');
+      loader.classList.add('hidden'); // Скрыть индикатор загрузки после 2 секунд
+    }, 2000);
     return;
   }
 
@@ -25,17 +29,21 @@ searchForm.addEventListener('submit', async (event) => {
   try {
     const data = await fetchImages(query);
 
-    if (data.hits.length === 0) {
-      showErrorToast('Sorry, there are no images matching your search query.Please try again.');
-      return;
-    }
-
-    renderImages(data.hits);
+    // Установить таймер на 2 секунды перед отображением результата
+    setTimeout(() => {
+      if (data.hits.length === 0) {
+        showErrorToast('Sorry, there are no images matching your search query. Please try again.');
+      } else {
+        renderImages(data.hits);
+      }
+      loader.classList.add('hidden'); // Скрыть индикатор загрузки после 2 секунд
+    }, 2000);
   } catch (error) {
-    showErrorToast(error.message);
-  } finally {
-    // Приховати індикатор завантаження незалежно від результату
-    loader.classList.add('hidden');
+    // Установить таймер на 2 секунды перед отображением ошибки
+    setTimeout(() => {
+      showErrorToast(error.message);
+      loader.classList.add('hidden'); // Скрыть индикатор загрузки после 2 секунд
+    }, 2000);
   }
 });
 
@@ -43,8 +51,7 @@ function showErrorToast(message) {
   iziToast.error({
     title: 'Error',
     message: message,
-    position: 'topRight'
-   });
+    position: 'topRight',
+    timeout: 5000, // Время, в течение которого сообщение будет отображаться
+  });
 }
-
- 
